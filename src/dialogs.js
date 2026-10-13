@@ -98,13 +98,30 @@ export async function openCite() {
   });
 }
 
+// ── keyboard shortcuts ────────────────────────────────
+export function openShortcuts() {
+  const list = [
+    ['Enter', 'Evaluate current input'],
+    ['Shift + Enter', 'Insert newline without evaluating'],
+    ['⌘K / Ctrl+K', 'Open Command Palette (search functions, modes, formulas)'],
+    ['Tab', 'Accept autocomplete suggestion'],
+    ['Alt + ↑ / ↓', 'Navigate previous / next input history'],
+    ['Ctrl + Z', 'Undo last notebook change'],
+    ['Ctrl + Shift + Z', 'Redo previously undone change'],
+    ['Escape', 'Close open modal, palette, or cancel inline edit'],
+    ['?', 'Open this keyboard shortcuts reference'],
+  ];
+  const rows = list.map(([k, d]) => `<div class="sc-row"><kbd class="sc-kbd">${escH(k)}</kbd><span class="sc-desc">${escH(d)}</span></div>`).join('');
+  modal('Keyboard Shortcuts', `<p class="modal-note">Keybindings for faster keyboard navigation and manipulation.</p><div class="sc-list">${rows}</div>`);
+}
+
 // ── the "More" menu ──────────────────────────────────
 export function toggleMoreMenu(anchor) {
   const open = document.getElementById('more-menu');
   if (open) { open.remove(); return; }
   const items = [
-    ['gallery', 'Gallery & templates'], ['history', 'Version history'], ['library', 'Function library'], ['formulas', 'Search formulas…'],
-    ['-'], ['md', 'Export Markdown'], ['qmd', 'Export Quarto (.qmd)'], ['import', 'Import Markdown / Quarto…'],
+    ['gallery', 'Gallery & templates'], ['history', 'Version history'], ['library', 'Function library'], ['formulas', 'Search formulas…'], ['shortcuts', 'Keyboard shortcuts (?)'],
+    ['-'], ['ipynb', 'Export Jupyter (.ipynb)'], ['py', 'Export Python script (.py)'], ['md', 'Export Markdown'], ['qmd', 'Export Quarto (.qmd)'], ['import', 'Import file (.cas, .ipynb, .md)…'],
     ['-'], ['collab', 'Collaborate (peer to peer)…'], ['cite', 'Cite…'], ['plugins', 'Plug-in API…'],
   ];
   const menu = document.createElement('div');

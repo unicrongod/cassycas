@@ -44,6 +44,14 @@ export default defineConfig({
   root: 'src',
   publicDir: '../public',
   base: './',
+  server: {
+    host: true,
+    port: 5173,
+  },
+  preview: {
+    host: true,
+    port: 4173,
+  },
   build: {
     outDir: single ? '../dist-single' : '../dist',
     emptyOutDir: true,
